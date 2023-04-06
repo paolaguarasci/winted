@@ -1,10 +1,11 @@
 package it.pingflood.wintedbe.data.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,51 +21,37 @@ import static jakarta.persistence.TemporalType.DATE;
 @ToString
 @RequiredArgsConstructor
 public class Customer {
-  public enum GENDER {
-    FEMALE, MALE, OTHER
-  }
   @Id
   @Column(name = "ID", nullable = false)
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
-  
   @Column(name = "USERNAME", unique = true)
   private String username;
-  
   @Column(name = "EMAIL", unique = true)
   private String email;
   @Column(name = "FIRST_NAME")
   private String firstName;
   @Column(name = "SECOND_NAME")
   private String secondName;
-  
   @Column(name = "GENDER")
   @Enumerated(EnumType.STRING)
   private GENDER gender;
-  
   @Column(name = "PHONE_NUMBER")
   private String phoneNumber;
-  
   @Column(name = "HOLIDAY_MODE")
   private Boolean holidayMode;
-  
   @Column(name = "BIRTHDATE")
   @Temporal(DATE)
   private LocalDate birthDate;
-  
   @Column(name = "BIO")
   private String bio;
-  
-  @Column(name="LAST_VISIT")
+  @Column(name = "LAST_VISIT")
   private LocalDateTime lastVisit;
-  
-  
   @Lob
-  @Column(name="AVATAR")
+  @Column(name = "AVATAR")
   @Basic(fetch = FetchType.LAZY)
   @ToString.Exclude
   private byte[] avatar;
-  
   @Embedded
   @AttributeOverrides({
     @AttributeOverride(name = "country", column = @Column(name = "POSITION_COUNTRY")),
@@ -72,7 +59,6 @@ public class Customer {
     @AttributeOverride(name = "showCity", column = @Column(name = "POSITION_SHOW_CITY"))
   })
   private Position position;
-  
   @Embedded
 //  @AttributeOverrides({
 //    @AttributeOverride(name = "country", column = @Column(name = "POSITION_COUNTRY")),
@@ -80,19 +66,18 @@ public class Customer {
 //    @AttributeOverride(name = "showCity", column = @Column(name = "POSITION_SHOW_CITY"))
 //  })
   private Address address;
-  
   @Enumerated(EnumType.STRING)
   private Lang lang;
-  
   @ManyToMany
   @JoinTable(
     name = "PREFERED",
     joinColumns = @JoinColumn(name = "CUSTOMER_ID", referencedColumnName = "ID"),
     inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID", referencedColumnName = "ID")
   )
+  @ToString.Exclude
   private List<Product> prefered;
-  
   @OneToMany(mappedBy = "owner")
+  @ToString.Exclude
   private List<Product> wardrobe; // my product
   
   @Override
@@ -106,5 +91,9 @@ public class Customer {
   @Override
   public int hashCode() {
     return getClass().hashCode();
+  }
+  
+  public enum GENDER {
+    FEMALE, MALE, OTHER
   }
 }
