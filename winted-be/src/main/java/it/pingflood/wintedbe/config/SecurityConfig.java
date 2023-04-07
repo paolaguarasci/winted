@@ -16,19 +16,19 @@ public class SecurityConfig {
   
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.cors()
-      .and().authorizeHttpRequests()
-      .requestMatchers(HttpMethod.GET, "/api/product/**")
-      .hasAuthority("SCOPE_read")
-      .requestMatchers(HttpMethod.POST, "/api/product")
-      .hasAuthority("SCOPE_write")
-      .anyRequest()
-      .authenticated()
-      .and()
-      .oauth2ResourceServer((oauth2) -> {
-        oauth2.jwt().decoder(jwtDecoder());
-        oauth2.jwt();
-      });
+//    http.cors()
+//      .and().authorizeHttpRequests()
+//      .requestMatchers(HttpMethod.GET, "/api/product/**")
+//      .hasAuthority("SCOPE_read")
+//      .requestMatchers(HttpMethod.POST, "/api/product")
+//      .hasAuthority("SCOPE_write")
+//      .anyRequest()
+//      .authenticated()
+//      .and()
+//      .oauth2ResourceServer((oauth2) -> {
+//        oauth2.jwt().decoder(jwtDecoder());
+//        oauth2.jwt();
+//      });
     return http.build();
   }
   
