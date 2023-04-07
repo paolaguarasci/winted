@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -16,7 +17,7 @@ import java.util.UUID;
 @ToString
 @RequiredArgsConstructor
 @Table(name = "CUSTOMER_ORDER")
-public class Order {
+public class Order extends Auditable<String> implements Serializable {
   
   @Id
   @Column(name = "ID", nullable = false)

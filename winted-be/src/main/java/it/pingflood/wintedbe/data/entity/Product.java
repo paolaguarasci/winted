@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -16,7 +17,7 @@ import java.util.UUID;
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class Product {
+public class Product extends Auditable<String> implements Serializable {
   @Id
   @Column(name = "ID", nullable = false)
   @GeneratedValue(strategy = GenerationType.UUID)

@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,7 +21,7 @@ import static jakarta.persistence.TemporalType.DATE;
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class Customer {
+public class Customer extends Auditable<String> implements Serializable {
   @Id
   @Column(name = "ID", nullable = false)
   @GeneratedValue(strategy = GenerationType.UUID)
