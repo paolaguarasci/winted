@@ -1,7 +1,10 @@
 package it.pingflood.wintedbe.data.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import java.util.Objects;
@@ -15,27 +18,21 @@ import java.util.UUID;
 @Table(name = "CUSTOMER_ORDER")
 public class Order {
   
-  public enum STATUS {
-    OPEN, CLOSED, ERROR
-  }
-  
   @Id
   @Column(name = "ID", nullable = false)
   @GeneratedValue(strategy = GenerationType.UUID)
   private UUID id;
-  
   @ManyToOne
   @JoinColumn(name = "CUSTOMER_ID")
   private Customer customer;
   @OneToOne
   @JoinColumn(name = "PRODUCT_ID")
   private Product product;
-  
   @Column(name = "NOTE")
   private String note;
-  
   @Column(name = "STATUS")
   private STATUS status = STATUS.OPEN;
+  
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -47,5 +44,9 @@ public class Order {
   @Override
   public int hashCode() {
     return getClass().hashCode();
+  }
+  
+  public enum STATUS {
+    OPEN, CLOSED, ERROR
   }
 }

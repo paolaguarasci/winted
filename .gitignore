@@ -106,3 +106,4 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/windows,linux,macos,java,nodejs
 n
 winted-be/src/main/resources/application.properties
+winted-web/src/environments.ts
