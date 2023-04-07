@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.List;
 
-import static java.lang.System.*;
+import static java.lang.System.out;
 
 @SpringBootApplication
 public class WintedBeApplication {
@@ -31,7 +31,5 @@ public class WintedBeApplication {
       for (Color x : color) out.println(x);
     };
   }
-  
-  
   
 }

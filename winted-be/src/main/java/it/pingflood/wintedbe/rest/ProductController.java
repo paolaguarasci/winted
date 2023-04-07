@@ -1,9 +1,9 @@
 package it.pingflood.wintedbe.rest;
 
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import it.pingflood.wintedbe.data.dto.ProductDTO;
 import it.pingflood.wintedbe.data.entity.Product;
 import it.pingflood.wintedbe.data.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -26,7 +26,18 @@ public class ProductController {
   
   @CrossOrigin(origins = "http://localhost:8082")
   @GetMapping(value = "/{id}")
+  @RateLimiter(name = "retryAndRateLimitExample")
   public ProductDTO findOne(@PathVariable UUID id) {
+    String uuidstring = "57361225-26ac-46cc-a2c4-07c81f50f1f8";
+    
+    UUID uuidCablato = UUID.fromString(uuidstring);
+    
+    ProductDTO dto = new ProductDTO(uuidCablato, "test", "desc");
+    
+    if (id.equals(uuidCablato)) {
+      return dto;
+    }
+    
     Product entity = this.productService.findById(id)
       .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     return convertToDto(entity);
