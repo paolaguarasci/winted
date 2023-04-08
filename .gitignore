@@ -107,3 +107,16 @@ $RECYCLE.BIN/
 n
 winted-be/src/main/resources/application.properties
 winted-web/src/environments.ts
+winted-web/cert/localhost.crt
+winted-web/cert/localhost.key
+keycloak/conf/cert/cert.pem
+keycloak/conf/cert/chain.pem
+keycloak/conf/cert/fullchain.pem
+keycloak/conf/cert/my-root-ca.crt.pem
+keycloak/conf/cert/my-root-ca.crt.srl
+keycloak/conf/cert/my-root-ca.key.pem
+keycloak/conf/cert/privkey.pem
+winted-be/src/main/resources/application.properties
+winted-be/src/main/resources/keystore/winted.jks
+keycloak/data/tmp/
+keycloak/data/h2/

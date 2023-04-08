@@ -15,7 +15,7 @@
     <name>winted-be</name>
     <description>winted-be</description>
     <properties>
-        <java.version>20</java.version>
+        <java.version>19</java.version>
     </properties>
     <dependencies>
         <dependency>
@@ -37,11 +37,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.okta.spring</groupId>
-            <artifactId>okta-spring-boot-starter</artifactId>
-            <version>3.0.3</version>
         </dependency>
 
         <dependency>

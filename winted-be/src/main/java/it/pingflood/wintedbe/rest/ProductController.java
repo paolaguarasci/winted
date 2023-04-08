@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+@CrossOrigin(origins = "https://localhost:8082")
 @RestController
 @RequestMapping(value = "/api/products")
 public class ProductController {
@@ -24,7 +25,7 @@ public class ProductController {
   }
   
   
-  @CrossOrigin(origins = "http://localhost:8082")
+
   @GetMapping(value = "/{id}")
   @RateLimiter(name = "retryAndRateLimitExample")
   public ProductDTO findOne(@PathVariable UUID id) {

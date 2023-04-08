@@ -12,7 +12,7 @@ import { environment } from 'src/environments';
 })
 export class ProductComponent implements OnInit {
   public product = new Product(
-    'ca52f802-5cf0-4c49-ae22-e71edcdfcef3',
+    '57361225-26ac-46cc-a2c4-07c81f50f1f8',
     'sample product',
     'sample desc'
   );

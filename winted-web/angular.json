@@ -63,6 +63,11 @@
         },
         "serve": {
           "builder": "@ngx-env/builder:dev-server",
+          "options": {
+            "sslKey": "cert/localhost.key",
+            "sslCert": "cert/localhost.crt",
+            "ssl": true
+          },
           "configurations": {
             "production": {
               "browserTarget": "winted-web:build:production"
