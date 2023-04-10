@@ -9,7 +9,7 @@
 POST {{authUrl}}/realms/winted/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
-client_id=web&username=paola123&password=paola123&grant_type=password&client_secret=wEh353Lwc2yokQMcaMHXKmm49RQ8YfCy
+client_id=web&username=paola&password=paola&grant_type=password&client_secret=wEh353Lwc2yokQMcaMHXKmm49RQ8YfCy
 
 ###
 client_id=web&grant_type=client_credentials&client_secret=wEh353Lwc2yokQMcaMHXKmm49RQ8YfCy
@@ -36,4 +36,14 @@ Authorization: Bearer {{authToken}}
 ###
 
 GET {{baseurl}}/api/users/info
+Authorization: Bearer {{authToken}}
+
+###
+
+GET {{baseurl}}/v3/api-docs
+Authorization: Bearer {{authToken}}
+
+###
+
+GET {{baseurl}}/swagger-ui/index.html
 Authorization: Bearer {{authToken}}

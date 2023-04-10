@@ -1,6 +1,6 @@
 #FileLock
-#Fri Apr 07 18:48:37 CEST 2023
+#Mon Apr 10 17:18:00 CEST 2023
 hostName=archino
-id=1875c9eb50660c892af59e11dac83a6ad2f0ad205c7
+id=1876bbed35292ae60ef26db63113253b3d7b0be399c
 method=file
-server=192.168.1.228\:35297
+server=192.168.1.228\:40435

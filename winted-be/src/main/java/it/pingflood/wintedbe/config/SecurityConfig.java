@@ -28,6 +28,9 @@ public class SecurityConfig {
       .hasAuthority("SCOPE_product:read")
       .requestMatchers(HttpMethod.GET, "/api/orders/**")
       .hasAuthority("SCOPE_order:read")
+      
+      .requestMatchers(HttpMethod.GET, "/v3/api-docs", "swagger-ui/index.html")
+      .hasAuthority("SCOPE_documentation")
       // .anyRequest().authenticated()
       .and()
       .oauth2ResourceServer(oauth2 -> oauth2
