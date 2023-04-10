@@ -119,7 +119,7 @@ keycloak/conf/cert/privkey.pem
 winted-be/src/main/resources/application.properties
 winted-be/src/main/resources/keystore/winted.jks
 keycloak/data/tmp/
-# keycloak/data/h2/
+keycloak/data/h2/
 
 winted-be/src/main/resources/application-dev.yml
 winted-be/src/main/resources/application-prod.yml
