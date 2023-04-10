@@ -42,7 +42,7 @@ public class Customer extends Auditable<String> implements Serializable {
   @Column(name = "PHONE_NUMBER")
   private String phoneNumber;
   
-  @Column(name = "HOLIDAY_MODE")
+  @Column(name = "HOLIDAY_MODE", columnDefinition="tinyint(1) default 1")
   private Boolean holidayMode;
   
   @Column(name = "BIRTHDATE")
@@ -63,7 +63,7 @@ public class Customer extends Auditable<String> implements Serializable {
   @AttributeOverrides({
     @AttributeOverride(name = "country", column = @Column(name = "POSITION_COUNTRY")),
     @AttributeOverride(name = "city", column = @Column(name = "POSITION_CITY")),
-    @AttributeOverride(name = "showCity", column = @Column(name = "POSITION_SHOW_CITY"))
+    @AttributeOverride(name = "showCity", column = @Column(name = "POSITION_SHOW_CITY", columnDefinition="tinyint(1) default 1"))
   })
   private Position position;
   @Embedded

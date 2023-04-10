@@ -1,23 +1,25 @@
 package it.pingflood.wintedbe.data.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.Hibernate;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
 @ToString
-@RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
+@Setter
+@NoArgsConstructor
 public class Product extends Auditable<String> implements Serializable {
+//  public class Product implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   @Column(name = "ID", nullable = false)
@@ -68,4 +70,18 @@ public class Product extends Auditable<String> implements Serializable {
   public enum STATUS {
     VISIBLE, HIDE
   }
+  
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+    Product product = (Product) o;
+    return getId() != null && Objects.equals(getId(), product.getId());
+  }
+  
+  @Override
+  public int hashCode() {
+    return getClass().hashCode();
+  }
+  
 }

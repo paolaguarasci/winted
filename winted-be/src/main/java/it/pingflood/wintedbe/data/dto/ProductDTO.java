@@ -1,4 +1,17 @@
 package it.pingflood.wintedbe.data.dto;
 
-public record ProductDTO(java.util.UUID id, String title, String description) {
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.UUID;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+public class ProductDTO {
+  UUID id;
+  String title;
+  String description;
 }

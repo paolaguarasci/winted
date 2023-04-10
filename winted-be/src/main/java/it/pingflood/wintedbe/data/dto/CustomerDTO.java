@@ -1,6 +1,15 @@
 package it.pingflood.wintedbe.data.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.UUID;
 
-public record CustomerDTO(UUID id, String email) {
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+public class CustomerDTO {
+  UUID id;
+  String email;
 }

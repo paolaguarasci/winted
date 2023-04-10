@@ -1,4 +1,4 @@
-set foreign_key_checks = 0;
+SET FOREIGN_KEY_CHECKS = 0;
 
 INSERT INTO `customer` (`id`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`, `address_line1`, `address_line2`, `cap`, `city`, `country`, `avatar`, `bio`, `birthdate`, `email`, `first_name`, `gender`, `holiday_mode`, `lang`, `last_visit`, `phone_number`, `position_city`, `position_country`, `position_show_city`, `second_name`, `username`) VALUES ('d31d535a-44ea-4148-91c1-e2e62ff0931b', NULL, NULL, NULL, NULL, 'Via Pagano 523', 'Appartamento 49', '77167', 'San Karim ligure', 'Giamaica', NULL, 'Eaque accusantium assumenda accusamus a dignissimos temporibus hic. Culpa et et ab ad.', '2000-12-09', 'martinelli.jari@example.net', 'Baldassarre', 'FEMALE', '0', 'ENG', '2023-03-18 12:07:40.000000', '389 344 936', 'Bianco veneto', 'Grecia', '1', 'Galli', 'aroldo48');
 INSERT INTO `customer` (`id`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`, `address_line1`, `address_line2`, `cap`, `city`, `country`, `avatar`, `bio`, `birthdate`, `email`, `first_name`, `gender`, `holiday_mode`, `lang`, `last_visit`, `phone_number`, `position_city`, `position_country`, `position_show_city`, `second_name`, `username`) VALUES ('c4a40e5d-eb77-452f-aa02-7de38f39792e', NULL, NULL, NULL, NULL, 'Via De rosa 2 Piano 7', 'Appartamento 65', '00430', 'Quarto Erminio', 'Saint Vincent and the Grenadines', NULL, 'Et quasi molestiae et omnis eveniet. Dolores vero quaerat eos id animi cumque qui. Eos aut facilis ducimus eveniet qui. Rem expedita voluptatem officiis dolor est commodi.', '2022-06-04', 'leone.lorenzo@example.com', 'Alessandro', 'FEMALE', '0', 'ITA', '2023-04-05 10:27:48.000000', '+01 8669 82810637', 'Ileana a mare', 'Uruguay', '1', 'Ferri', 'mariagiulia.benedetti');
@@ -79,4 +79,4 @@ INSERT INTO `prefered` (`customer_id`, `product_id`) VALUES ('b742d9c4-caae-4702
 INSERT INTO `prefered` (`customer_id`, `product_id`) VALUES ('b742d9c4-caae-4702-9f7b-932c4d83da13', 'bb4ad37b-2f38-5ae5-9ae3-88897859d51b');
 INSERT INTO `prefered` (`customer_id`, `product_id`) VALUES ('b742d9c4-caae-4702-9f7b-932c4d83da13', 'b5226d25-d052-522b-a110-c6e6c431d851');
 
-set foreign_key_checks = 1;
+SET FOREIGN_KEY_CHECKS = 1;

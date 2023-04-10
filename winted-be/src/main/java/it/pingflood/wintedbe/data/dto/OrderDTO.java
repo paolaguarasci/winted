@@ -1,7 +1,18 @@
 package it.pingflood.wintedbe.data.dto;
 
 import it.pingflood.wintedbe.data.entity.Customer;
+import it.pingflood.wintedbe.data.entity.Product;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public record OrderDTO(java.util.UUID id, Customer customer,
-                       it.pingflood.wintedbe.data.entity.Product product) {
+import java.util.UUID;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+public class OrderDTO{
+  UUID id;
+  Customer customer;
+  Product product;
 }

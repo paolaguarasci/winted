@@ -83,22 +83,4 @@ public class SecurityConfig {
       registry.addMapping("/**");
     }
   }
-
-//  @Configuration
-//  public static class SSLConfig {
-//    private final Environment env;
-//
-//    public SSLConfig(Environment env) {
-//      this.env = env;
-//    }
-//
-//    @PostConstruct
-//    private void configureSSL() {
-//      System.out.println("=================================== SSL CONFIG ============================================================");
-//      System.setProperty("https.protocols", "TLSv1.3");
-//      System.setProperty("javax.net.ssl.trustStore", Objects.requireNonNull(env.getProperty("server.ssl.trust-store")));
-//      System.setProperty("javax.net.ssl.trustStorePassword", Objects.requireNonNull(env.getProperty("server.ssl.trust-store-password")));
-//    }
-//  }
-
 }

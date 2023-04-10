@@ -22,6 +22,10 @@ GET {{baseurl}}/api/products/
 Authorization: Bearer {{authToken}}
 
 ###
+GET {{baseurl}}/api/products/8567ceba-9fc4-5b13-8fb3-c574bc60a362
+Authorization: Bearer {{authToken}}
+
+###
 GET {{baseurl}}/api/orders/
 Authorization: Bearer {{authToken}}
 

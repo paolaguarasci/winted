@@ -21,6 +21,7 @@ public class ProductController {
   private final ProductService productService;
   private final ModelMapper modelMapper;
   
+  
   public ProductController(ProductService productService) {
     this.productService = productService;
     this.modelMapper = new ModelMapper();
@@ -31,6 +32,7 @@ public class ProductController {
   
   @GetMapping(value = "/{id}")
   @RateLimiter(name = "product-findOne")
+//  @PreAuthorize("hasRole('ROLE_ADMIN')")
   public ResponseEntity<ProductDTO> findOne(@PathVariable UUID id) {
     return ResponseEntity.ok(modelMapper.map(productService.findById(id)
       .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)), ProductDTO.class));
