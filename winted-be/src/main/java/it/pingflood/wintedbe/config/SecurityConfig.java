@@ -29,8 +29,13 @@ public class SecurityConfig {
       .requestMatchers(HttpMethod.GET, "/api/orders/**")
       .hasAuthority("SCOPE_order:read")
       
+      
       .requestMatchers(HttpMethod.GET, "/v3/api-docs", "swagger-ui/index.html")
       .hasAuthority("SCOPE_documentation")
+      
+      .requestMatchers(HttpMethod.GET, "/api/users/info")
+      .hasAuthority("SCOPE_profile")
+
       // .anyRequest().authenticated()
       .and()
       .oauth2ResourceServer(oauth2 -> oauth2
