@@ -37,6 +37,9 @@ public class LogServiceImpl implements LogService {
   @Override
   public void displayReq(HttpServletRequest request, Object body) {
     StringBuilder reqMessage = new StringBuilder();
+    
+    System.out.println(" - PRINCIPAL - " + request.getUserPrincipal());
+    
     Map<String,String> parameters = getParameters(request);
     
     reqMessage.append("REQUEST ");

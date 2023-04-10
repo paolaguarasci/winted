@@ -21,7 +21,7 @@ import java.util.UUID;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/api/users")
+@RequestMapping(value = "/api")
 public class CustomerController {
   private final CustomerService customerService;
   
@@ -37,7 +37,7 @@ public class CustomerController {
       .setFieldAccessLevel(Configuration.AccessLevel.PRIVATE);
   }
   
-  @GetMapping(value = "/")
+  @GetMapping(value = "/users")
   @RateLimiter(name = "users-findAll")
   public ResponseEntity<List<CustomerDTO>> findAll() {
     return ResponseEntity.ok(customerService.findAll()
@@ -46,13 +46,13 @@ public class CustomerController {
       .toList());
   }
   
-  @GetMapping(value = "/{id}")
+  @GetMapping(value = "/users/{id}")
   @RateLimiter(name = "users-findOne")
   public ResponseEntity<CustomerDTO> findOne(@PathVariable UUID id) {
     return ResponseEntity.ok(modelMapper.map(customerService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)), CustomerDTO.class));
   }
   
-  @GetMapping(value = "/info")
+  @GetMapping(value = "/users/info")
   @RateLimiter(name = "customer-getUserInfo")
   public ResponseEntity<CustomerDTO> getUserInfo(Model model, @AuthenticationPrincipal OAuth2User oauth2User) {
     logService.print(Log.builder().method(Log.REQUEST_METHOD.GET).uri("sss").status(200).build());

@@ -15,7 +15,7 @@ import java.util.UUID;
 
 @CrossOrigin
 @RestController
-@RequestMapping(value = "/api/products")
+@RequestMapping(value = "/api")
 public class ProductController {
   
   private final ProductService productService;
@@ -30,15 +30,14 @@ public class ProductController {
       .setFieldAccessLevel(Configuration.AccessLevel.PRIVATE);
   }
   
-  @GetMapping(value = "/{id}")
+  @GetMapping(value = "/products/{id}")
   @RateLimiter(name = "product-findOne")
-//  @PreAuthorize("hasRole('ROLE_ADMIN')")
   public ResponseEntity<ProductDTO> findOne(@PathVariable UUID id) {
     return ResponseEntity.ok(modelMapper.map(productService.findById(id)
       .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)), ProductDTO.class));
   }
   
-  @GetMapping(value = "/")
+  @GetMapping(value = "/products")
   @RateLimiter(name = "product-findAll")
   public ResponseEntity<List<ProductDTO>> findAll() {
     return ResponseEntity.ok(productService.findAll()

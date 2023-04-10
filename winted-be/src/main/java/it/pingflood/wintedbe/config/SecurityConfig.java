@@ -24,12 +24,11 @@ public class SecurityConfig {
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.cors()
       .and().authorizeHttpRequests()
-      .requestMatchers(HttpMethod.GET, "/api/product/**")
-      .hasAuthority("SCOPE_read")
-      .requestMatchers(HttpMethod.POST, "/api/product")
-      .hasAuthority("SCOPE_write")
-      .anyRequest()
-      .authenticated()
+      .requestMatchers(HttpMethod.GET, "/api/products/**")
+      .hasAuthority("SCOPE_product:read")
+      .requestMatchers(HttpMethod.GET, "/api/orders/**")
+      .hasAuthority("SCOPE_order:read")
+      // .anyRequest().authenticated()
       .and()
       .oauth2ResourceServer(oauth2 -> oauth2
         .jwt(jwt -> jwt
@@ -64,9 +63,7 @@ public class SecurityConfig {
     
     @Override
     public OAuth2TokenValidatorResult validate(Jwt jwt) {
-      System.out.println("TOKEN - " + jwt.toString());
       if (jwt.getAudience().contains("web")) {
-        
         return OAuth2TokenValidatorResult.success();
       } else {
         return OAuth2TokenValidatorResult.failure(error);
