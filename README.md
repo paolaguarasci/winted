@@ -37,9 +37,9 @@ angular 8082
 
 # TODO
 
-- [ ] verifica permessi differenti path con auth server
-- [ ] verifica permessi differenti utenti con auth server
-- [ ] decidere come rappresentare l'utente nella base di dati, cosa salvarsi dell'utente
+- [X] verifica permessi differenti path con auth server
+- [X] verifica permessi differenti utenti con auth server
+- [X] decidere come rappresentare l'utente nella base di dati, cosa salvarsi dell'utente
 - [X] generatore di dati
 - [ ] chiedere al prof se va bene keycloak o intende una cosa con auth server (il pacchetto deprecato)
 - [X] repositories
@@ -49,6 +49,7 @@ angular 8082
 - [ ] mutual-TLS
 - [ ] accessi basati suoi ruoli
 - [ ] sistemare la storia del refresh token in angular
+- [ ] 
 
 # User story
 
