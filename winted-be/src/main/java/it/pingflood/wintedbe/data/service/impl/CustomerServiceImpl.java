@@ -3,8 +3,9 @@ package it.pingflood.wintedbe.data.service.impl;
 import it.pingflood.wintedbe.data.entity.Customer;
 import it.pingflood.wintedbe.data.repo.CustomerRepository;
 import it.pingflood.wintedbe.data.service.CustomerService;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -41,11 +42,14 @@ public class CustomerServiceImpl implements CustomerService {
   }
   
   @Override
-  @Transactional
-  public Customer findOrSaveByEmail(String email) {
-    return customerRepository.findByEmail(email).orElseGet(() -> {
-      return save(new Customer(email));
-    });
+  public Customer getUserInfo() {
+
+    var authentication = SecurityContextHolder.getContext().getAuthentication();
+    var jwt = (Jwt) authentication.getPrincipal();
+    var username = (String) jwt.getClaims().get("preferred_username");
+    var email = (String) jwt.getClaims().get("email");
+
+    return customerRepository.findByEmail(email).orElseGet(() -> save(Customer.builder().email(email).username(username).build()));
   }
   
 }

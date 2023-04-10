@@ -15,5 +15,5 @@ public interface CustomerService {
   
   Optional<Customer> findByEmail(String email);
   
-  Customer findOrSaveByEmail(String email);
+  Customer getUserInfo();
 }

@@ -76,6 +76,7 @@ public class LogServiceImpl implements LogService {
     if (body != null) {
       message = (String) body;
       System.out.println("Body " + body);
+    
     }
     Log log = Log.builder().customer_id(request.getUserPrincipal().getName()).status(response.getStatus()).message(message).uri(request.getRequestURI()).method(Log.REQUEST_METHOD.valueOf(request.getMethod())).at(LocalDateTime.now()).build();
     logRepository.save(log);

@@ -3,7 +3,6 @@ package it.pingflood.wintedbe.rest;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import it.pingflood.wintedbe.data.dto.CustomerDTO;
-import it.pingflood.wintedbe.data.entity.Log;
 import it.pingflood.wintedbe.data.service.CustomerService;
 import it.pingflood.wintedbe.data.service.LogService;
 import org.modelmapper.ModelMapper;
@@ -55,14 +54,6 @@ public class CustomerController {
   @GetMapping(value = "/users/info")
   @RateLimiter(name = "customer-getUserInfo")
   public ResponseEntity<CustomerDTO> getUserInfo(Model model, @AuthenticationPrincipal OAuth2User oauth2User) {
-    logService.print(Log.builder().method(Log.REQUEST_METHOD.GET).uri("sss").status(200).build());
-    
-    model.addAttribute("userName", oauth2User.getName());
-    model.addAttribute("userAttributes", oauth2User.getAttributes());
-    model.addAttribute("email", oauth2User.getAttributes().get("email"));
-    
-    System.out.println("MODELLO - " + model);
-    
-    return ResponseEntity.ok(modelMapper.map(customerService.findOrSaveByEmail("paolaguarasci@gmail.com"), CustomerDTO.class));
+    return ResponseEntity.ok(modelMapper.map(customerService.getUserInfo(), CustomerDTO.class));
   }
 }

@@ -30,8 +30,7 @@ public class InterceptLog implements HandlerInterceptor {
   
   @Override
   public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception e) throws Exception {
-    // TODO Trovare come salvare il motivo (ex.getMessage()) di una eventuale eccezione
-      logService.save(request, response, handler.toString()); // salva il metodo che ha gestito la chiamata
+    logService.save(request, response, handler.toString()); // salva il metodo che ha gestito la chiamata
   }
   
 }

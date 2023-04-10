@@ -1,10 +1,7 @@
 package it.pingflood.wintedbe.data.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -21,6 +18,7 @@ import static jakarta.persistence.TemporalType.DATE;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
 public class Customer extends Auditable<String> implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
