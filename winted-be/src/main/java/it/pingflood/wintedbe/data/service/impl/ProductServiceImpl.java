@@ -5,6 +5,7 @@ import it.pingflood.wintedbe.data.repo.ProductRepository;
 import it.pingflood.wintedbe.data.service.ProductService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -28,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
   }
   
   @Override
-  public Iterable<Product> findAll() {
+  public List<Product> findAll() {
     return productRepository.findAll();
   }
 }

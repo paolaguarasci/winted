@@ -1,36 +1,26 @@
 package it.pingflood.wintedbe.data.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.Hibernate;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
 @ToString
 @RequiredArgsConstructor
+@Builder
+@AllArgsConstructor
 public class Color extends Auditable<String> implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "ID", nullable = false)
   private Long id;
-  
+  @Column(name = "NAME")
   private String name;
-  private String value;
+  @Column(name = "VALUE_CODE")
+  private String valueCode;
   
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-    Color color = (Color) o;
-    return getId() != null && Objects.equals(getId(), color.getId());
-  }
-  
-  @Override
-  public int hashCode() {
-    return getClass().hashCode();
-  }
 }

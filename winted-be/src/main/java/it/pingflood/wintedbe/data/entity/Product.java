@@ -1,27 +1,30 @@
 package it.pingflood.wintedbe.data.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.Hibernate;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-@Getter
-@Setter
 @ToString
 @RequiredArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Product extends Auditable<String> implements Serializable {
   @Id
-  @Column(name = "ID", nullable = false)
   @GeneratedValue(strategy = GenerationType.UUID)
+  @Column(name = "ID", nullable = false)
+  @JdbcTypeCode(SqlTypes.VARCHAR)
   private UUID id;
+  
+  
   @ManyToOne
   @JoinColumn(name = "OWNER_ID", referencedColumnName = "ID")
   private Customer owner;
@@ -53,19 +56,6 @@ public class Product extends Auditable<String> implements Serializable {
   @Column(name = "STATUS")
   @Enumerated(EnumType.STRING)
   private STATUS status = STATUS.VISIBLE;
-  
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-    Product product = (Product) o;
-    return getId() != null && Objects.equals(getId(), product.getId());
-  }
-  
-  @Override
-  public int hashCode() {
-    return getClass().hashCode();
-  }
   
   public enum CONDITION {
     NEW_WITH_LABEL, NEW_NO_LABEL, OPTIMUM, GOOD, AVERAGE

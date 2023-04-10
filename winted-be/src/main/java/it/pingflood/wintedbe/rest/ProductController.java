@@ -2,59 +2,47 @@ package it.pingflood.wintedbe.rest;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import it.pingflood.wintedbe.data.dto.ProductDTO;
-import it.pingflood.wintedbe.data.entity.Product;
 import it.pingflood.wintedbe.data.service.ProductService;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.config.Configuration;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-@CrossOrigin(origins = "https://localhost:8082")
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/products")
 public class ProductController {
   
   private final ProductService productService;
+  private final ModelMapper modelMapper;
   
   public ProductController(ProductService productService) {
     this.productService = productService;
+    this.modelMapper = new ModelMapper();
+    modelMapper.getConfiguration()
+      .setFieldMatchingEnabled(true)
+      .setFieldAccessLevel(Configuration.AccessLevel.PRIVATE);
   }
   
-  
-
   @GetMapping(value = "/{id}")
-  @RateLimiter(name = "retryAndRateLimitExample")
-  public ProductDTO findOne(@PathVariable UUID id) {
-    String uuidstring = "57361225-26ac-46cc-a2c4-07c81f50f1f8";
-    
-    UUID uuidCablato = UUID.fromString(uuidstring);
-    
-    ProductDTO dto = new ProductDTO(uuidCablato, "test", "desc");
-    
-    if (id.equals(uuidCablato)) {
-      return dto;
-    }
-    
-    Product entity = this.productService.findById(id)
-      .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-    return convertToDto(entity);
+  @RateLimiter(name = "product-findOne")
+  public ResponseEntity<ProductDTO> findOne(@PathVariable UUID id) {
+    return ResponseEntity.ok(modelMapper.map(productService.findById(id)
+      .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)), ProductDTO.class));
   }
   
-  @GetMapping
-  public Collection<ProductDTO> findAll() {
-    Iterable<Product> products = this.productService.findAll();
-    List<ProductDTO> productDTOS = new ArrayList<>();
-    products.forEach(p -> productDTOS.add(convertToDto(p)));
-    return productDTOS;
+  @GetMapping(value = "/")
+  @RateLimiter(name = "product-findAll")
+  public ResponseEntity<List<ProductDTO>> findAll() {
+    return ResponseEntity.ok(productService.findAll()
+      .stream()
+      .map(product -> modelMapper.map(product, ProductDTO.class))
+      .toList());
   }
   
-  protected ProductDTO convertToDto(Product entity) {
-    ProductDTO dto = new ProductDTO(entity.getId(), entity.getTitle(), entity.getDescription());
-    
-    return dto;
-  }
 }

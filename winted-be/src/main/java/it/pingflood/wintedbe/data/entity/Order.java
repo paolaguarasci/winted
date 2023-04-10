@@ -1,28 +1,30 @@
 package it.pingflood.wintedbe.data.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.Hibernate;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.io.Serializable;
-import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-@Getter
-@Setter
 @ToString
 @RequiredArgsConstructor
+@Builder
+@AllArgsConstructor
 @Table(name = "CUSTOMER_ORDER")
 public class Order extends Auditable<String> implements Serializable {
   
   @Id
-  @Column(name = "ID", nullable = false)
   @GeneratedValue(strategy = GenerationType.UUID)
+  @Column(name = "ID", nullable = false)
+  @JdbcTypeCode(SqlTypes.VARCHAR)
   private UUID id;
+  
   @ManyToOne
   @JoinColumn(name = "CUSTOMER_ID")
   private Customer customer;
@@ -34,18 +36,6 @@ public class Order extends Auditable<String> implements Serializable {
   @Column(name = "STATUS")
   private STATUS status = STATUS.OPEN;
   
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-    Order order = (Order) o;
-    return getId() != null && Objects.equals(getId(), order.getId());
-  }
-  
-  @Override
-  public int hashCode() {
-    return getClass().hashCode();
-  }
   
   public enum STATUS {
     OPEN, CLOSED, ERROR
