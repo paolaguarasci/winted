@@ -2,6 +2,7 @@ package it.pingflood.wintedbe.rest;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import it.pingflood.wintedbe.data.dto.ProductDTO;
+import it.pingflood.wintedbe.data.service.CustomerService;
 import it.pingflood.wintedbe.data.service.ProductService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration;
@@ -21,9 +22,11 @@ public class ProductController {
   private final ProductService productService;
   private final ModelMapper modelMapper;
   
+  private final CustomerService customerService;
   
-  public ProductController(ProductService productService) {
+  public ProductController(ProductService productService, CustomerService customerService) {
     this.productService = productService;
+    this.customerService = customerService;
     this.modelMapper = new ModelMapper();
     modelMapper.getConfiguration()
       .setFieldMatchingEnabled(true)
@@ -40,7 +43,7 @@ public class ProductController {
   @GetMapping(value = "/products")
   @RateLimiter(name = "product-findAll")
   public ResponseEntity<List<ProductDTO>> findAll() {
-    return ResponseEntity.ok(productService.findAll()
+    return ResponseEntity.ok(productService.findAllPublic()
       .stream()
       .map(product -> modelMapper.map(product, ProductDTO.class))
       .toList());

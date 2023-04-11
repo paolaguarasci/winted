@@ -19,7 +19,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 public class Product extends Auditable<String> implements Serializable {
-//  public class Product implements Serializable {
+  //  public class Product implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
   @Column(name = "ID", nullable = false)
@@ -59,18 +59,6 @@ public class Product extends Auditable<String> implements Serializable {
   @Enumerated(EnumType.STRING)
   private STATUS status = STATUS.VISIBLE;
   
-  public enum CONDITION {
-    NEW_WITH_LABEL, NEW_NO_LABEL, OPTIMUM, GOOD, AVERAGE
-  }
-  
-  public enum PACK_DIMENSION {
-    SMALL, MEDIUM, BIG
-  }
-  
-  public enum STATUS {
-    VISIBLE, HIDE
-  }
-  
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -82,6 +70,18 @@ public class Product extends Auditable<String> implements Serializable {
   @Override
   public int hashCode() {
     return getClass().hashCode();
+  }
+  
+  public enum CONDITION {
+    NEW_WITH_LABEL, NEW_NO_LABEL, OPTIMUM, GOOD, AVERAGE
+  }
+  
+  public enum PACK_DIMENSION {
+    SMALL, MEDIUM, BIG
+  }
+  
+  public enum STATUS {
+    VISIBLE, HIDE
   }
   
 }

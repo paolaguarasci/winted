@@ -29,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
   }
   
   @Override
-  public List<Product> findAll() {
+  public List<Product> findAllPublic() {
     return productRepository.findAll();
   }
 }

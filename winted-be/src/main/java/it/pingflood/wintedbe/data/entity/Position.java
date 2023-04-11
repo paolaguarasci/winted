@@ -9,6 +9,6 @@ public class Position {
   
   private String country;
   
-  @Column(name = "SHOW_CITY", columnDefinition="tinyint(1)")
+  @Column(name = "SHOW_CITY", columnDefinition = "tinyint(1)")
   private Boolean showCity = true;
 }

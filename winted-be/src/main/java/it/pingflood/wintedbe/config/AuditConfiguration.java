@@ -13,5 +13,5 @@ public class AuditConfiguration {
   public AuditorAware<String> auditorAware() {
     return new EntityAuditorAware();
   }
- 
+  
 }

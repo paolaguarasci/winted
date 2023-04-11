@@ -14,6 +14,6 @@ public interface LogService {
   
   void displayResp(HttpServletRequest request, HttpServletResponse response, Object body);
   
- 
+  
   void save(HttpServletRequest request, HttpServletResponse response, Object body);
 }

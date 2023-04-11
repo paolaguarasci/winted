@@ -11,7 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class OrderDTO{
+public class OrderDTO {
   UUID id;
   Customer customer;
   Product product;

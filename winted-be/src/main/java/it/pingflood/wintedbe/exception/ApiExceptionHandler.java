@@ -30,41 +30,42 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     this.logService = logService;
   }
   
- 
-  @ExceptionHandler({ DataIntegrityViolationException.class })
+  
+  @ExceptionHandler({DataIntegrityViolationException.class})
   public ResponseEntity<Object> handleBadRequest(final DataIntegrityViolationException ex, final WebRequest request) {
     Map<String, String> bodyResp = new HashMap<String, String>();
     return handleExceptionInternal(ex, bodyResp.toString(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
   }
   
-
+  
   protected ResponseEntity<Object> handleHttpMessageNotReadable(final HttpMessageNotReadableException ex, final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
     final String bodyOfResponse = "This should be application specific";
     // ex.getCause() instanceof JsonMappingException, JsonParseException // for additional information later on
     return handleExceptionInternal(ex, bodyOfResponse, headers, HttpStatus.BAD_REQUEST, request);
   }
   
-
+  
   protected ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException ex, final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
     final String bodyOfResponse = "This should be application specific";
     return handleExceptionInternal(ex, bodyOfResponse, headers, HttpStatus.BAD_REQUEST, request);
   }
   
-
-  @ExceptionHandler({ AccessDeniedException.class })
+  
+  @ExceptionHandler({AccessDeniedException.class})
   public ResponseEntity<Object> handleAccessDeniedException(final Exception ex, final WebRequest request) {
     System.out.println("request" + request.getUserPrincipal());
     return new ResponseEntity<Object>("Access denied message here", new HttpHeaders(), HttpStatus.FORBIDDEN);
   }
-  @ExceptionHandler({ InvalidDataAccessApiUsageException.class, DataAccessException.class })
+  
+  @ExceptionHandler({InvalidDataAccessApiUsageException.class, DataAccessException.class})
   protected ResponseEntity<Object> handleConflict(final RuntimeException ex, final WebRequest request) {
     final String bodyOfResponse = "This should be application specific";
     return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.CONFLICT, request);
     
   }
-
-  @ExceptionHandler({ NullPointerException.class, IllegalArgumentException.class, IllegalStateException.class })
-    public ResponseEntity<Object> handleInternal(final RuntimeException ex, final WebRequest request) {
+  
+  @ExceptionHandler({NullPointerException.class, IllegalArgumentException.class, IllegalStateException.class})
+  public ResponseEntity<Object> handleInternal(final RuntimeException ex, final WebRequest request) {
     return handleExceptionInternal(ex, makeBodyOfResponse(HttpStatus.INTERNAL_SERVER_ERROR, ex.getLocalizedMessage(), "INTERNAL SERVER ERROR"), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
   }
   

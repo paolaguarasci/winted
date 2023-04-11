@@ -16,7 +16,7 @@ public class CustomerServiceImpl implements CustomerService {
   
   private final CustomerRepository customerRepository;
   
- 
+  
   public CustomerServiceImpl(CustomerRepository customerRepository) {
     this.customerRepository = customerRepository;
   }
@@ -43,12 +43,12 @@ public class CustomerServiceImpl implements CustomerService {
   
   @Override
   public Customer getUserInfo() {
-
+    
     var authentication = SecurityContextHolder.getContext().getAuthentication();
     var jwt = (Jwt) authentication.getPrincipal();
     var username = (String) jwt.getClaims().get("preferred_username");
     var email = (String) jwt.getClaims().get("email");
-
+    
     return customerRepository.findByEmail(email).orElseGet(() -> save(Customer.builder().email(email).username(username).build()));
   }
   

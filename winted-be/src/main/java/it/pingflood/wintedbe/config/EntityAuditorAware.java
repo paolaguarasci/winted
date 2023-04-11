@@ -7,7 +7,7 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import java.util.Optional;
 
 public class EntityAuditorAware implements AuditorAware<String> {
- 
+  
   @Override
   public Optional<String> getCurrentAuditor() {
     var authentication = SecurityContextHolder.getContext().getAuthentication();

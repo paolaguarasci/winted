@@ -1,10 +1,7 @@
 package it.pingflood.wintedbe.data.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -15,6 +12,7 @@ import java.util.UUID;
 @ToString
 @RequiredArgsConstructor
 @Builder
+@Getter
 @AllArgsConstructor
 public class Photo extends Auditable<String> implements Serializable {
   @Id
