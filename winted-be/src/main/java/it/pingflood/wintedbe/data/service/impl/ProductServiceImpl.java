@@ -1,5 +1,6 @@
 package it.pingflood.wintedbe.data.service.impl;
 
+import it.pingflood.wintedbe.data.dto.request.ProductCreateRequest;
 import it.pingflood.wintedbe.data.entity.Product;
 import it.pingflood.wintedbe.data.repo.ProductRepository;
 import it.pingflood.wintedbe.data.service.ProductService;
@@ -24,8 +25,10 @@ public class ProductServiceImpl implements ProductService {
   }
   
   @Override
-  public Product save(Product product) {
-    return productRepository.save(product);
+  public Product save(ProductCreateRequest productCreateRequest) {
+    
+    // return productRepository.save(product);
+    return null;
   }
   
   @Override

@@ -1,4 +1,4 @@
--- SET FOREIGN_KEY_CHECKS = 0;
+# SET FOREIGN_KEY_CHECKS = 0;
 
 INSERT INTO `customer` (`id`, `created_by`, `created_date`, `last_modified_by`, `last_modified_date`, `address_line1`,
                         `address_line2`, `cap`, `city`, `country`, `avatar`, `bio`, `birthdate`, `email`, `first_name`,
@@ -270,4 +270,4 @@ VALUES ('b742d9c4-caae-4702-9f7b-932c4d83da13', 'bb4ad37b-2f38-5ae5-9ae3-8889785
 INSERT INTO `prefered` (`customer_id`, `product_id`)
 VALUES ('b742d9c4-caae-4702-9f7b-932c4d83da13', 'b5226d25-d052-522b-a110-c6e6c431d851');
 
--- SET FOREIGN_KEY_CHECKS = 1;
+# SET FOREIGN_KEY_CHECKS = 1;

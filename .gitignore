@@ -126,3 +126,4 @@ winted-be/src/main/resources/application-prod.yml
 winted-be/src/main/resources/application.properties
 winted-be/src/main/resources/application.yml
 winted-be/src/main/resources/db/dev.mv.db
+winted-be/src/main/resources/application-test.yml

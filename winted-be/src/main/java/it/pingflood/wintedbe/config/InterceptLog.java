@@ -3,11 +3,13 @@ package it.pingflood.wintedbe.config;
 import it.pingflood.wintedbe.data.service.LogService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 @Component
+@Profile(value = {"dev", "prod"})
 public class InterceptLog implements HandlerInterceptor {
   
   private final LogService logService;

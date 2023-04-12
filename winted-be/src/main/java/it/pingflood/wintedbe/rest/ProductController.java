@@ -2,6 +2,7 @@ package it.pingflood.wintedbe.rest;
 
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import it.pingflood.wintedbe.data.dto.ProductDTO;
+import it.pingflood.wintedbe.data.dto.request.ProductCreateRequest;
 import it.pingflood.wintedbe.data.service.CustomerService;
 import it.pingflood.wintedbe.data.service.ProductService;
 import org.modelmapper.ModelMapper;
@@ -48,5 +49,9 @@ public class ProductController {
       .map(product -> modelMapper.map(product, ProductDTO.class))
       .toList());
   }
-  
+  @PostMapping(value = "/products")
+  @RateLimiter(name = "product-saveOne")
+  public ResponseEntity<ProductDTO> saveOne(@RequestBody ProductCreateRequest pcr) {
+    return ResponseEntity.ok(modelMapper.map(productService.save(pcr), ProductDTO.class));
+  }
 }

@@ -3,6 +3,7 @@ package it.pingflood.wintedbe.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
@@ -16,12 +17,14 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+@Profile(value = {"dev", "prod"})
 public class SecurityConfig {
   @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
   private String issuerUri;
   
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    System.out.println("DEV===================================================");
     http.cors()
       .and().authorizeHttpRequests()
       .requestMatchers(HttpMethod.GET, "/api/products/**")
