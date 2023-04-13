@@ -1,4 +1,4 @@
-package it.pingflood.wintedbe.rest;
+package it.pingflood.wintedbe.service;
 
 import it.pingflood.wintedbe.data.dto.request.ProductCreateRequest;
 import it.pingflood.wintedbe.data.entity.*;
