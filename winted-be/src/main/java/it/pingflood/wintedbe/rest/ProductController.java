@@ -3,6 +3,7 @@ package it.pingflood.wintedbe.rest;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import it.pingflood.wintedbe.data.dto.ProductDTO;
 import it.pingflood.wintedbe.data.dto.request.ProductCreateRequest;
+import it.pingflood.wintedbe.data.dto.request.ProductModifyRequest;
 import it.pingflood.wintedbe.data.service.CustomerService;
 import it.pingflood.wintedbe.data.service.ProductService;
 import org.modelmapper.ModelMapper;
@@ -34,14 +35,14 @@ public class ProductController {
       .setFieldAccessLevel(Configuration.AccessLevel.PRIVATE);
   }
   
-  @GetMapping(value = "/products/{id}")
+  @GetMapping(value = "/product/{id}")
   @RateLimiter(name = "product-findOne")
   public ResponseEntity<ProductDTO> findOne(@PathVariable UUID id) {
     return ResponseEntity.ok(modelMapper.map(productService.findById(id)
       .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)), ProductDTO.class));
   }
   
-  @GetMapping(value = "/products")
+  @GetMapping(value = "/product")
   @RateLimiter(name = "product-findAll")
   public ResponseEntity<List<ProductDTO>> findAll() {
     return ResponseEntity.ok(productService.findAllPublic()
@@ -49,9 +50,34 @@ public class ProductController {
       .map(product -> modelMapper.map(product, ProductDTO.class))
       .toList());
   }
-  @PostMapping(value = "/products")
+  @PostMapping(value = "/product")
   @RateLimiter(name = "product-saveOne")
   public ResponseEntity<ProductDTO> saveOne(@RequestBody ProductCreateRequest pcr) {
-    return ResponseEntity.ok(modelMapper.map(productService.save(pcr), ProductDTO.class));
+    try {
+      return ResponseEntity.ok(modelMapper.map(productService.save(pcr), ProductDTO.class));
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+  
+  @PutMapping(value = "/product/{id}")
+  @RateLimiter(name = "product-modifyOne")
+  public ResponseEntity<ProductDTO> modifyOne(@PathVariable UUID id, @RequestBody ProductModifyRequest pmr) {
+    try {
+      return ResponseEntity.ok(modelMapper.map(productService.update(id, pmr), ProductDTO.class));
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+  }
+ 
+  @DeleteMapping(value = "/product/{id}")
+  @RateLimiter(name = "product-deleteOne")
+  public ResponseEntity deleteOne(@PathVariable UUID id) {
+    try {
+      productService.delete(id);
+    } catch (Exception e) {
+      return ResponseEntity.notFound().build();
+    }
+    return ResponseEntity.noContent().build();
   }
 }

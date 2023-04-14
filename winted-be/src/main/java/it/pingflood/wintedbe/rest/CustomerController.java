@@ -36,8 +36,8 @@ public class CustomerController {
       .setFieldAccessLevel(Configuration.AccessLevel.PRIVATE);
   }
   
-  @GetMapping(value = "/users")
-  @RateLimiter(name = "users-findAll")
+  @GetMapping(value = "/customer")
+  @RateLimiter(name = "customer-findAll")
   public ResponseEntity<List<CustomerDTO>> findAll() {
     return ResponseEntity.ok(customerService.findAll()
       .stream()
@@ -45,15 +45,25 @@ public class CustomerController {
       .toList());
   }
   
-  @GetMapping(value = "/users/{id}")
-  @RateLimiter(name = "users-findOne")
+  @GetMapping(value = "/customer/{id}")
+  @RateLimiter(name = "customer-findOne")
   public ResponseEntity<CustomerDTO> findOne(@PathVariable UUID id) {
     return ResponseEntity.ok(modelMapper.map(customerService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)), CustomerDTO.class));
   }
   
-  @GetMapping(value = "/users/info")
-  @RateLimiter(name = "customer-getUserInfo")
+  @GetMapping(value = "/customer/info")
+  @RateLimiter(name = "customer-getInfo")
   public ResponseEntity<CustomerDTO> getUserInfo(Model model, @AuthenticationPrincipal OAuth2User oauth2User) {
     return ResponseEntity.ok(modelMapper.map(customerService.getUserInfo(), CustomerDTO.class));
+  }
+  
+  
+  @GetMapping(value = "/customer/product")
+  @RateLimiter(name = "customer-getProduct")
+  public ResponseEntity<CustomerDTO> getProductInfo(Model model, @AuthenticationPrincipal OAuth2User oauth2User) {
+    // TODO
+    // devi usare l'id loggato in contesto ovviamente!
+    // return ResponseEntity.ok(modelMapper.map(customerService.getUserInfo(), CustomerDTO.class));
+    return null;
   }
 }

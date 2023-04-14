@@ -30,14 +30,14 @@ public class OrderController {
       .setFieldAccessLevel(Configuration.AccessLevel.PRIVATE);
   }
   
-  @GetMapping(value = "/orders")
+  @GetMapping(value = "/order")
   @RateLimiter(name = "retryAndRateLimitExample")
   @PreAuthorize("hasAuthority('SCOPE_order:read')")
   public ResponseEntity<List<OrderDTO>> findAll() {
     return ResponseEntity.ok(orderService.findAll().stream().map(order -> modelMapper.map(order, OrderDTO.class)).toList());
   }
   
-  @GetMapping(value = "/orders/{id}")
+  @GetMapping(value = "/order/{id}")
   @RateLimiter(name = "retryAndRateLimitExample")
   @PreAuthorize("hasAuthority('SCOPE_order:read')")
   public ResponseEntity<OrderDTO> findOne(@PathVariable UUID id) {
