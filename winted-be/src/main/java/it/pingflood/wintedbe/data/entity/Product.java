@@ -1,5 +1,6 @@
 package it.pingflood.wintedbe.data.entity;
 
+import it.pingflood.wintedbe.data.vo.ProductTitle;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -30,8 +31,16 @@ public class Product extends Auditable<String> implements Serializable {
   @ManyToOne
   @JoinColumn(name = "OWNER_ID", referencedColumnName = "ID")
   private Customer owner;
-  @Column(name = "TITLE", nullable = false)
-  private String title;
+//  @Column(name = "TITLE", nullable = false)
+//  private String title;
+  
+
+  @Embedded
+  @AttributeOverrides({
+    @AttributeOverride(name = "value", column = @Column(name = "TITLE")),
+  })
+  private ProductTitle productTitle;
+  
   @Column(name = "DESCRIPTION", nullable = false)
   private String description;
   @Embedded

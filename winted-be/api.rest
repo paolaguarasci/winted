@@ -8,7 +8,7 @@
 POST {{authUrl}}/realms/winted/protocol/openid-connect/token
 Content-Type: application/x-www-form-urlencoded
 
-client_id=web&username=paola123&password=paola123&grant_type=password&client_secret=wEh353Lwc2yokQMcaMHXKmm49RQ8YfCy
+client_id=web&username=paola&password=paola&grant_type=password&client_secret=wEh353Lwc2yokQMcaMHXKmm49RQ8YfCy
 
 ###
 client_id=web&grant_type=client_credentials&client_secret=wEh353Lwc2yokQMcaMHXKmm49RQ8YfCy
@@ -23,7 +23,7 @@ GET {{baseurl}}/api/products
 Authorization: Bearer {{authToken}}
 
 ###
-GET {{baseurl}}/api/products/8567ceba-9fc4-5b13-8fb3-c574bc60a362
+GET {{baseurl}}/api/products/bb4ad37b-2f38-5ae5-9ae3-88897859d51b
 Authorization: Bearer {{authToken}}
 
 ###
